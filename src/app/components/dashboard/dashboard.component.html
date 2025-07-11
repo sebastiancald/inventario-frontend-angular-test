@@ -1,0 +1,142 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="mb-4">
+        <i class="fas fa-tachometer-alt me-2"></i>
+        Dashboard
+      </h1>
+    </div>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3">
+      <div class="card text-white bg-primary">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h5 class="card-title">Total Mercancías</h5>
+              <h2 class="mb-0">{{ totalMercancias }}</h2>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-boxes fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <div class="card text-white bg-success">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h5 class="card-title">Total Stock</h5>
+              <h2 class="mb-0">{{ totalStock }}</h2>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-warehouse fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <div class="card text-white bg-info">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h5 class="card-title">Total Usuarios</h5>
+              <h2 class="mb-0">{{ totalUsuarios }}</h2>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-users fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h5 class="card-title">Total Cargos</h5>
+              <h2 class="mb-0">{{ totalCargos }}</h2>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-briefcase fa-2x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tablas de resumen -->
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <i class="fas fa-boxes me-2"></i>
+            Últimas Mercancías
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Fecha Ingreso</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let mercancia of mercancias.slice(0, 5)">
+                  <td>{{ mercancia.nombreProducto }}</td>
+                  <td>{{ mercancia.cantidad }}</td>
+                  <td>{{ mercancia.fechaIngreso | date:'shortDate' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <i class="fas fa-users me-2"></i>
+            Usuarios Registrados
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Cargo</th>
+                  <th>Edad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let usuario of usuarios.slice(0, 5)">
+                  <td>{{ usuario.nombre }}</td>
+                  <td>{{ usuario.cargo?.nombre }}</td>
+                  <td>{{ usuario.edad }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

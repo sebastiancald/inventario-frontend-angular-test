@@ -1,0 +1,93 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3>{{ isEditMode ? 'Editar' : 'Nuevo' }} Usuario</h3>
+        </div>
+        <div class="card-body">
+          <div *ngIf="loading" class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+          </div>
+
+          <div *ngIf="error" class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+
+          <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nombre" class="form-label">Nombre *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="nombre" 
+                  formControlName="nombre"
+                  [class.is-invalid]="usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched">
+                <div class="invalid-feedback" *ngIf="usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched">
+                  {{ getErrorMessage('nombre') }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="edad" class="form-label">Edad *</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="edad" 
+                  formControlName="edad"
+                  [class.is-invalid]="usuarioForm.get('edad')?.invalid && usuarioForm.get('edad')?.touched">
+                <div class="invalid-feedback" *ngIf="usuarioForm.get('edad')?.invalid && usuarioForm.get('edad')?.touched">
+                  {{ getErrorMessage('edad') }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cargoId" class="form-label">Cargo *</label>
+                <select 
+                  class="form-select" 
+                  id="cargoId" 
+                  formControlName="cargoId"
+                  [class.is-invalid]="usuarioForm.get('cargoId')?.invalid && usuarioForm.get('cargoId')?.touched">
+                  <option value="">Seleccione un cargo</option>
+                  <option *ngFor="let cargo of cargos" [value]="cargo.id">
+                    {{ cargo.nombre }}
+                  </option>
+                </select>
+                <div class="invalid-feedback" *ngIf="usuarioForm.get('cargoId')?.invalid && usuarioForm.get('cargoId')?.touched">
+                  {{ getErrorMessage('cargoId') }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="fechaIngreso" class="form-label">Fecha de Ingreso *</label>
+                <input 
+                  type="date" 
+                  class="form-control" 
+                  id="fechaIngreso" 
+                  formControlName="fechaIngreso"
+                  [class.is-invalid]="usuarioForm.get('fechaIngreso')?.invalid && usuarioForm.get('fechaIngreso')?.touched">
+                <div class="invalid-feedback" *ngIf="usuarioForm.get('fechaIngreso')?.invalid && usuarioForm.get('fechaIngreso')?.touched">
+                  {{ getErrorMessage('fechaIngreso') }}
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary" (click)="onCancel()">
+                <i class="fas fa-times"></i> Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="usuarioForm.invalid || loading">
+                <i class="fas fa-save"></i> {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
